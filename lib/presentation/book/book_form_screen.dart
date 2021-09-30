@@ -27,121 +27,123 @@ class _BookFormScreenState extends State<BookFormScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Add Book'),
-      ),
-      body: Container(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Form(
-                  key: _formKey,
-                  child: Expanded(
-                    child: Column(
-                      children: [
-                        TextFieldWidget(
-                          con: bookTitle,
-                          hint: 'Enter Book Title',
-                          validate: MultiValidator([
-                            RequiredValidator(errorText: "Please enter title"),
-                          ]),
-                        ),
-                        TextFieldWidget(
-                          con: bookDescription,
-                          hint: 'Enter Book Description',
-                          validate: MultiValidator([
-                            RequiredValidator(errorText: "Please enter description"),
-                          ]),
-                        ),
-                        TextFieldWidget(
-                          con: bookYear,
-                          hint: 'Enter Book Year',
-                          validate: MultiValidator([
-                            RequiredValidator(errorText: "Please enter year"),
-                          ]),
-                        ),
-                        TextFieldWidget(
-                          con: bookPages,
-                          hint: 'Enter Book Pages',
-                          validate: MultiValidator([
-                            RequiredValidator(errorText: "Please enter page"),
-                          ]),
-                        ),
-                        TextFieldWidget(
-                          con: bookLanguage,
-                          hint: 'Enter Book Language',
-                          validate: MultiValidator([
-                            RequiredValidator(errorText: "Please enter language"),
-                          ]),
-                        ),
-                        TextFieldWidget(
-                          con: bookPublisher,
-                          hint: 'Enter Book Publisher',
-                          validate: MultiValidator([
-                            RequiredValidator(errorText: "Please enter publisher"),
-                          ]),
-                        ),
-                        TextFieldWidget(
-                          con: bookPrice,
-                          hint: 'Rp.-',
-                          validate: MultiValidator([
-                            RequiredValidator(errorText: "Please enter price"),
-                          ]),
-                        ),
-                        TextFieldWidget(
-                          con: bookStock,
-                          hint: 'Enter Book Stock',
-                          validate: MultiValidator([
-                            RequiredValidator(errorText: "Please enter stock"),
-                          ]),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: ElevatedButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  setState(() {
-                                    //_bookRepository.addProduct(new Book(title: bookTitle.text, description: bookDescription.text, year: bookYear, pages: pages, language: bookLanguage.text, publisher: bookPublisher.text, price: price, stock: stock))
-                                    widget.bookViewModel.addBook(Book(
-                                      title: bookTitle.text,
-                                      description: bookDescription.text,
-                                      year: int.parse(bookYear.text),
-                                      pages: int.parse(bookPages.text),
-                                      language: bookLanguage.text,
-                                      publisher: bookPublisher.text,
-                                      price: int.parse(bookPrice.text),
-                                      stock: int.parse(bookStock.text),
-                                    ));
-                                  });
-                                  Navigator.pop(context);
-                                }
-                              },
-                              child: Text('Submit Asli')),
-                        ),
-                      ],
-                    ),
-                  )),
-            ),
-            // TextButton(
-            //   onPressed: () {
-            //     setState(() {
-            //       widget.bookViewModel.addBook(Book(
-            //         title: 'Kancil',
-            //         description: 'description',
-            //         year: 2008,
-            //         pages: 50,
-            //         language: 'English',
-            //         publisher: 'Gramedia',
-            //         price: 50000,
-            //         stock: 20,
-            //       ));
-            //     });
-            //   },
-            //   child: Text('Submit Dummy'),
-            // ),
-          ],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Add Book'),
+        ),
+        body: Container(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Form(
+                    key: _formKey,
+                    child: Expanded(
+                      child: Column(
+                        children: [
+                          TextFieldWidget(
+                            con: bookTitle,
+                            hint: 'Enter Book Title',
+                            validate: MultiValidator([
+                              RequiredValidator(errorText: "Please enter title"),
+                            ]),
+                          ),
+                          TextFieldWidget(
+                            con: bookDescription,
+                            hint: 'Enter Book Description',
+                            validate: MultiValidator([
+                              RequiredValidator(errorText: "Please enter description"),
+                            ]),
+                          ),
+                          TextFieldWidget(
+                            con: bookYear,
+                            hint: 'Enter Book Year',
+                            validate: MultiValidator([
+                              RequiredValidator(errorText: "Please enter year"),
+                            ]),
+                          ),
+                          TextFieldWidget(
+                            con: bookPages,
+                            hint: 'Enter Book Pages',
+                            validate: MultiValidator([
+                              RequiredValidator(errorText: "Please enter page"),
+                            ]),
+                          ),
+                          TextFieldWidget(
+                            con: bookLanguage,
+                            hint: 'Enter Book Language',
+                            validate: MultiValidator([
+                              RequiredValidator(errorText: "Please enter language"),
+                            ]),
+                          ),
+                          TextFieldWidget(
+                            con: bookPublisher,
+                            hint: 'Enter Book Publisher',
+                            validate: MultiValidator([
+                              RequiredValidator(errorText: "Please enter publisher"),
+                            ]),
+                          ),
+                          TextFieldWidget(
+                            con: bookPrice,
+                            hint: 'Rp.-',
+                            validate: MultiValidator([
+                              RequiredValidator(errorText: "Please enter price"),
+                            ]),
+                          ),
+                          TextFieldWidget(
+                            con: bookStock,
+                            hint: 'Enter Book Stock',
+                            validate: MultiValidator([
+                              RequiredValidator(errorText: "Please enter stock"),
+                            ]),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    setState(() {
+                                      //_bookRepository.addProduct(new Book(title: bookTitle.text, description: bookDescription.text, year: bookYear, pages: pages, language: bookLanguage.text, publisher: bookPublisher.text, price: price, stock: stock))
+                                      widget.bookViewModel.addBook(Book(
+                                        title: bookTitle.text,
+                                        description: bookDescription.text,
+                                        year: int.parse(bookYear.text),
+                                        pages: int.parse(bookPages.text),
+                                        language: bookLanguage.text,
+                                        publisher: bookPublisher.text,
+                                        price: int.parse(bookPrice.text),
+                                        stock: int.parse(bookStock.text),
+                                      ));
+                                    });
+                                    Navigator.pop(context, 'done');
+                                  }
+                                },
+                                child: Text('Submit Asli')),
+                          ),
+                        ],
+                      ),
+                    )),
+              ),
+              // TextButton(
+              //   onPressed: () {
+              //     setState(() {
+              //       widget.bookViewModel.addBook(Book(
+              //         title: 'Kancil',
+              //         description: 'description',
+              //         year: 2008,
+              //         pages: 50,
+              //         language: 'English',
+              //         publisher: 'Gramedia',
+              //         price: 50000,
+              //         stock: 20,
+              //       ));
+              //     });
+              //   },
+              //   child: Text('Submit Dummy'),
+              // ),
+            ],
+          ),
         ),
       ),
     );

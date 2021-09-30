@@ -20,4 +20,18 @@ class ApiHelper{
     }
   }
 
+  Future<dynamic> getData(String path, {Map<String, dynamic>? queryParameter})async{
+    try{
+      Response response = await _dio.get(path, queryParameters: queryParameter);
+      if(response.statusCode == 200 || response.statusCode == 201){
+        return response.data;
+      }else{
+        throw Exception('Failed get data');
+      }
+    }catch(e){
+      print(e);
+      throw Exception('Connection failure');
+    }
+  }
+
 }

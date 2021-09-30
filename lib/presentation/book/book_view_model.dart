@@ -8,4 +8,10 @@ class BookViewModel{
     final newBookRegistered = await _bookRepository.addProduct(newBook);
     print(newBookRegistered);
   }
+
+  Future<List<dynamic>> getBook()async{
+    final getListBook = await _bookRepository.getProduct();
+    print(getListBook);
+    return getListBook;
+  }
 }
