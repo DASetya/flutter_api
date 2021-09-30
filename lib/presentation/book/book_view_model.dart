@@ -14,4 +14,10 @@ class BookViewModel{
     print(getListBook);
     return getListBook;
   }
+
+  Future<List<dynamic>> deleteBook()async{
+    final deleteListBook = await _bookRepository.deleteProduct();
+    print(deleteListBook);
+    return deleteListBook;
+  }
 }

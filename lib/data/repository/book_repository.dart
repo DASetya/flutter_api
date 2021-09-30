@@ -14,4 +14,10 @@ class BookRepository{
     final response = await _apiHelper.getData('/book');
     return BookResponse.fromList(response).books;
   }
+  
+  Future<List<dynamic>> deleteProduct()async{
+    final response = await _apiHelper.deleteData('/book/id');
+    return BookResponse.fromList(response).books;
+  }
+  
 }

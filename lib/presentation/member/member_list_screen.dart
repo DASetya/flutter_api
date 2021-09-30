@@ -10,18 +10,17 @@ class MemberListScreen extends StatefulWidget {
 }
 
 class _MemberListScreenState extends State<MemberListScreen> {
-
   @override
-  void initState(){
+  void initState() {
     super.initState();
     _getListMember();
   }
 
   List<dynamic> listMember = <Member>[];
 
-  _getListMember()async{
+  _getListMember() async {
     listMember = await widget.memberViewModel.getMember();
-    Future.delayed(const Duration(microseconds: 500), (){
+    Future.delayed(const Duration(microseconds: 500), () {
       setState(() {
         listMember = listMember;
       });
@@ -34,40 +33,62 @@ class _MemberListScreenState extends State<MemberListScreen> {
       body: Container(
         child: Column(
           children: [
-            Text('Member List'),
-            FloatingActionButton(
-              onPressed: () async {
-                final status = await Navigator.pushNamed(context, '/add-member');
-                if(status=='done'){
-                  setState(() {
-                    _getListMember();
-                  });
-                }
-              },
-              child: Text(
-                '+',
-                style: TextStyle(fontSize: 34),
-              ),
-            ),
-            Expanded(child: Card(
-              child: Scrollbar(
-                child: ListView.builder(itemBuilder: (context, index) {
-                  return Column(children: [
-                    Row(
-                      children: [
-                        Expanded(
-                            child: ListTile(
-                              leading: Icon(
-                                Icons.perm_identity,
-                                size: 40.0,
-                              ),
-                              title: Text(listMember[index].firstName),
-                            )),
-                      ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('Member List'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FloatingActionButton(
+                    onPressed: () async {
+                      final status =
+                      await Navigator.pushNamed(context, '/add-member');
+                      if (status == 'done') {
+                        setState(() {
+                          _getListMember();
+                        });
+                      }
+                    },
+                    child: Text(
+                      '+',
+                      style: TextStyle(fontSize: 34),
                     ),
-                    Divider(height: 5, color: Colors.cyan,)
-                  ]);
-                },
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+                child: Card(
+              child: Scrollbar(
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    return Column(children: [
+                      Row(
+                        children: [
+                          Expanded(
+                              child: ListTile(
+                            leading: Icon(
+                              Icons.perm_identity,
+                              size: 40.0,
+                            ),
+                            title: Text(listMember[index].firstName),
+                            trailing: IconButton(
+                                onPressed: () {
+                                  setState(() {});
+                                },
+                                icon: const Icon(Icons.delete)),
+                          )),
+                        ],
+                      ),
+                      Divider(
+                        height: 5,
+                        color: Colors.cyan,
+                      )
+                    ]);
+                  },
                   itemCount: listMember.length,
                 ),
               ),
