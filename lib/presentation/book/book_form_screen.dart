@@ -115,6 +115,7 @@ class _BookFormScreenState extends State<BookFormScreen> {
                                       stock: int.parse(bookStock.text),
                                     ));
                                   });
+                                  Navigator.pop(context);
                                 }
                               },
                               child: Text('Submit Asli')),
