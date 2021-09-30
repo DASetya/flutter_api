@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api/presentation/book/book_form_screen.dart';
 import 'package:flutter_api/presentation/book/book_list_screen.dart';
+import 'package:flutter_api/presentation/member/member_form_screen.dart';
 import 'package:flutter_api/presentation/member/member_list_screen.dart';
 
 class StoreApp extends StatefulWidget {
@@ -37,7 +38,8 @@ class _StoreAppState extends State<StoreApp> {
         ),
       ),
       routes: {
-        '/add-book' : (context) => BookFormScreen()
+        '/add-book' : (context) => BookFormScreen(),
+        '/add-member' : (context) => MemberFormScreen()
       },
     );
   }
