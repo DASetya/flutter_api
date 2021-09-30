@@ -20,4 +20,27 @@ class Book{
     required this.price,
     required this.stock
   });
+
+  Map<String, dynamic> toMap() => {
+    'id' : id ?? '',
+    'title' : title,
+    'description' : description,
+    'year' : year,
+    'pages' : pages,
+    'language' : language,
+    'publisher' : publisher,
+    'price' : price,
+    'stock' : stock
+  };
+
+  Book.fromMap(Map<String, dynamic> map)
+  : id = map['id'],
+  title = map['title'],
+  description = map['description'],
+  year = map['year'],
+  pages = map['pages'],
+  language = map['language'],
+  publisher = map['publisher'],
+  price = map['price'],
+  stock = map['stock'];
 }
