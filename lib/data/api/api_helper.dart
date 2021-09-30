@@ -34,10 +34,10 @@ class ApiHelper{
     }
   }
 
-  Future<dynamic> deleteData(String path, {Map<String, dynamic>? queryParameter})async{
+  Future<dynamic> deleteData(String path)async{
     try{
-      Response response = await _dio.delete(path, queryParameters: queryParameter);
-      if(response.statusCode == 200 || response.statusCode == 201){
+      Response response = await _dio.delete(path);
+      if(response.statusCode == 200 || response.statusCode == 204){
         return response.data;
       }else{
         throw Exception('Failed delete data');

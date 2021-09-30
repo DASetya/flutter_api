@@ -14,4 +14,9 @@ class MemberRepository{
     final response = await _apiHelper.getData('/member');
     return MemberResponse.fromList(response).books;
   }
+
+  Future<List<dynamic>> deleteMember(id)async{
+    final response = await _apiHelper.deleteData('/member/id/status');
+    return MemberResponse.fromList(response).books;
+  }
 }

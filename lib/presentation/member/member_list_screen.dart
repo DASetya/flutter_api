@@ -77,7 +77,9 @@ class _MemberListScreenState extends State<MemberListScreen> {
                             title: Text(listMember[index].firstName),
                             trailing: IconButton(
                                 onPressed: () {
-                                  setState(() {});
+                                  setState(() {
+                                    widget.memberViewModel.deleteMember(listMember[index].id);
+                                  });
                                 },
                                 icon: const Icon(Icons.delete)),
                           )),
