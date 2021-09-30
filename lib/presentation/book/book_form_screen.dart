@@ -13,7 +13,6 @@ class BookFormScreen extends StatefulWidget {
 }
 
 class _BookFormScreenState extends State<BookFormScreen> {
-  BookRepository _bookRepository = BookRepository();
   TextEditingController bookTitle = new TextEditingController();
   TextEditingController bookDescription = new TextEditingController();
   TextEditingController bookYear = new TextEditingController();
@@ -100,7 +99,6 @@ class _BookFormScreenState extends State<BookFormScreen> {
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             setState(() {
-                              //_bookRepository.addProduct(new Book(title: bookTitle.text, description: bookDescription.text, year: bookYear, pages: pages, language: bookLanguage.text, publisher: bookPublisher.text, price: price, stock: stock))
                               widget.bookViewModel.addBook(Book(
                                 title: bookTitle.text,
                                 description: bookDescription.text,
@@ -115,7 +113,7 @@ class _BookFormScreenState extends State<BookFormScreen> {
                             Navigator.pop(context, 'done');
                           }
                         },
-                        child: Text('Submit Asli')),
+                        child: Text('Submit')),
                   ],
                 ),
               ),
