@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_api/data/api/api_helper.dart';
+import 'package:flutter_api/data/api/api_helper_impl.dart';
 import 'package:flutter_api/data/model/member.dart';
+import 'package:flutter_api/data/repository/member_repository.dart';
 import 'package:flutter_api/presentation/member/member_view_model.dart';
 
 class MemberListScreen extends StatefulWidget {
-  MemberViewModel memberViewModel = MemberViewModel();
+  late MemberViewModel _memberViewModel;
+  BookFormScreen(){
+    ApiHelper apiHelper = ApiHelperImpl.INSTANCE;
+    MemberRepository _memberRepository = MemberRepository(apiHelper);
+    _memberViewModel = MemberViewModel(_memberRepository);
+  }
 
   @override
   _MemberListScreenState createState() => _MemberListScreenState();
@@ -19,7 +27,7 @@ class _MemberListScreenState extends State<MemberListScreen> {
   List<dynamic> listMember = <Member>[];
 
   _getListMember() async {
-    listMember = await widget.memberViewModel.getMember();
+    listMember = await widget._memberViewModel.getMember();
     Future.delayed(const Duration(microseconds: 500), () {
       setState(() {
         listMember = listMember.where((element) => element.status!=0).toList();
@@ -79,7 +87,7 @@ class _MemberListScreenState extends State<MemberListScreen> {
                             trailing: IconButton(
                                 onPressed: () {
                                   setState(() {
-                                    widget.memberViewModel.deleteMember(listMember[index].id);
+                                    widget._memberViewModel.deleteMember(listMember[index].id);
                                   });
                                 },
                                 icon: const Icon(Icons.delete)),

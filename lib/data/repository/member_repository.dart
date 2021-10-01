@@ -3,7 +3,9 @@ import 'package:flutter_api/data/model/member.dart';
 import 'package:flutter_api/data/model/member_response.dart';
 
 class MemberRepository{
-  final ApiHelper _apiHelper = ApiHelper.INSTANCE;
+  ApiHelper _apiHelper;
+
+  MemberRepository(this._apiHelper);
 
   Future<Member> addMember(Member newMember) async{
     final response = await _apiHelper.postData('/member', newMember.toMap());

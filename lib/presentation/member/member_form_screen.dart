@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_api/data/api/api_helper.dart';
+import 'package:flutter_api/data/api/api_helper_impl.dart';
 import 'package:flutter_api/data/model/member.dart';
+import 'package:flutter_api/data/repository/member_repository.dart';
 import 'package:flutter_api/presentation/member/member_view_model.dart';
 import 'package:flutter_api/widget/text_field_widget.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 class MemberFormScreen extends StatefulWidget {
-  MemberViewModel memberViewModel = MemberViewModel();
+  late MemberViewModel _memberViewModel;
+  BookFormScreen(){
+    ApiHelper apiHelper = ApiHelperImpl.INSTANCE;
+    MemberRepository _memberRepository = MemberRepository(apiHelper);
+    _memberViewModel = MemberViewModel(_memberRepository);
+  }
 
   @override
   _MemberFormScreenState createState() => _MemberFormScreenState();
@@ -68,7 +76,7 @@ class _MemberFormScreenState extends State<MemberFormScreen> {
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             setState(() {
-                              widget.memberViewModel.addMember(Member(
+                              widget._memberViewModel.addMember(Member(
                                 firstName: firstName.text,
                                 lastName: lastName.text,
                                 email: email.text,

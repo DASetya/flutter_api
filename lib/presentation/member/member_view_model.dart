@@ -2,7 +2,9 @@ import 'package:flutter_api/data/model/member.dart';
 import 'package:flutter_api/data/repository/member_repository.dart';
 
 class MemberViewModel{
-  MemberRepository _memberRepository = MemberRepository();
+  MemberRepository _memberRepository;
+
+  MemberViewModel(this._memberRepository);
 
   addMember(Member newMember)async{
     final newMemberRegistered = await _memberRepository.addMember(newMember);

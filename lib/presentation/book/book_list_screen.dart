@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_api/data/api/api_helper.dart';
+import 'package:flutter_api/data/api/api_helper_impl.dart';
 import 'package:flutter_api/data/model/book.dart';
 import 'package:flutter_api/data/repository/book_repository.dart';
 import 'package:flutter_api/presentation/book/book_view_model.dart';
@@ -6,15 +8,18 @@ import 'package:flutter_api/presentation/book/book_view_model.dart';
 import 'book_detail_screen.dart';
 
 class BookListScreen extends StatefulWidget {
-  BookViewModel bookViewModel = BookViewModel();
+  late BookViewModel _bookViewModel;
+  BookFormScreen(){
+    ApiHelper apiHelper = ApiHelperImpl.INSTANCE;
+    BookRepository _bookRepository = BookRepository(apiHelper);
+    _bookViewModel = BookViewModel(_bookRepository);
+  }
 
   @override
   _BookListScreenState createState() => _BookListScreenState();
 }
 
 class _BookListScreenState extends State<BookListScreen> {
-
-  BookRepository _bookRepository = BookRepository();
 
   @override
   void initState() {
@@ -25,7 +30,7 @@ class _BookListScreenState extends State<BookListScreen> {
   List<dynamic> listBook = <Book>[];
 
   _getListBook() async {
-    listBook = await widget.bookViewModel.getBook();
+    listBook = await widget._bookViewModel.getBook();
     Future.delayed(const Duration(microseconds: 500), () {
       setState(() {
         listBook = listBook;
@@ -98,7 +103,7 @@ class _BookListScreenState extends State<BookListScreen> {
                             trailing: IconButton(
                                 onPressed: () {
                                   setState(() {
-                                    widget.bookViewModel.deleteBook(listBook[index].id);
+                                    widget._bookViewModel.deleteBook(listBook[index].id);
                                   });
                                 },
                                 icon: const Icon(Icons.delete)),
