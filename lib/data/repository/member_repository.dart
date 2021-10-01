@@ -12,11 +12,11 @@ class MemberRepository{
 
   Future<List<dynamic>> getMember()async{
     final response = await _apiHelper.getData('/member');
-    return MemberResponse.fromList(response).books;
+    return MemberResponse.fromList(response).members;
   }
 
   Future<List<dynamic>> deleteMember(id)async{
-    final response = await _apiHelper.deleteData('/member/id/status');
-    return MemberResponse.fromList(response).books;
+    final response = await _apiHelper.deleteData('/member/$id/0');
+    return MemberResponse.fromList(response).members;
   }
 }

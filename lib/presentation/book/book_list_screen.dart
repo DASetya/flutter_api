@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api/data/model/book.dart';
+import 'package:flutter_api/data/repository/book_repository.dart';
 import 'package:flutter_api/presentation/book/book_view_model.dart';
+
+import 'book_detail_screen.dart';
 
 class BookListScreen extends StatefulWidget {
   BookViewModel bookViewModel = BookViewModel();
@@ -10,6 +13,9 @@ class BookListScreen extends StatefulWidget {
 }
 
 class _BookListScreenState extends State<BookListScreen> {
+
+  BookRepository _bookRepository = BookRepository();
+
   @override
   void initState() {
     super.initState();
@@ -27,12 +33,12 @@ class _BookListScreenState extends State<BookListScreen> {
     });
   }
 
-  _deleteListBook() async{
-    listBook = await widget.bookViewModel.deleteBook();
-    setState(() {
-      listBook = listBook;
-    });
-  }
+  // _deleteListBook() async{
+  //   listBook = await widget.bookViewModel.deleteBook();
+  //   setState(() {
+  //     listBook = listBook;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -82,10 +88,17 @@ class _BookListScreenState extends State<BookListScreen> {
                               size: 40.0,
                             ),
                             title: Text(listBook[index].title),
+                            onTap: (){
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             BookDetail(book: _bookRepository.getProduct()[index])));
+                            },
                             trailing: IconButton(
                                 onPressed: () {
                                   setState(() {
-                                    _deleteListBook();
+                                    widget.bookViewModel.deleteBook(listBook[index].id);
                                   });
                                 },
                                 icon: const Icon(Icons.delete)),

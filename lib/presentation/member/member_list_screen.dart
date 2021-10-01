@@ -22,7 +22,8 @@ class _MemberListScreenState extends State<MemberListScreen> {
     listMember = await widget.memberViewModel.getMember();
     Future.delayed(const Duration(microseconds: 500), () {
       setState(() {
-        listMember = listMember;
+        listMember = listMember.where((element) => element.status!=0).toList();
+        //listMember = listMember;
       });
     });
   }
@@ -38,7 +39,7 @@ class _MemberListScreenState extends State<MemberListScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text('Member List'),
+                  child: Text('Member List', style: TextStyle(fontSize: 24, color: Colors.blue) ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),

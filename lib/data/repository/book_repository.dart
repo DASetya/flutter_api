@@ -15,8 +15,8 @@ class BookRepository{
     return BookResponse.fromList(response).books;
   }
   
-  Future<List<dynamic>> deleteProduct()async{
-    final response = await _apiHelper.deleteData('/book/id');
+  Future<List<dynamic>> deleteProduct(id)async{
+    final response = await _apiHelper.deleteData('/book/$id');
     return BookResponse.fromList(response).books;
   }
   

@@ -5,7 +5,7 @@ class ApiHelper{
 
   static ApiHelper INSTANCE = ApiHelper._privateConstructor();
 
-  final _dio = Dio(BaseOptions(baseUrl: 'http://172.28.112.1:8080'));
+  final _dio = Dio(BaseOptions(baseUrl: 'http://192.168.100.7:8080'));
 
   Future<dynamic> postData(String path, Map<String, dynamic> data) async{
     try{
